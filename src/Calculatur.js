@@ -13,18 +13,18 @@ function Calculator() {
   }
 
   const handleCalculate = () => {
-    const regex = /(-?\d+)(\+|\-|\*|\/)(-?\d+)/;
-    const matches = regex.exec(value);
-  
+    const regex = /(-?\d+\.?\d*)(\+|\-|\*|\/)(-?\d+\.?\d*)/;
+    const matches = value.match(regex);
+
     if (!matches || matches.length !== 4) {
       setValue('Error');
       return;
     }
-  
-    const num1 = parseInt(matches[1]);
+
+    const num1 = parseFloat(matches[1]);
     const operator = matches[2];
-    const num2 = parseInt(matches[3]);
-  
+    const num2 = parseFloat(matches[3]);
+
     let result;
     switch (operator) {
       case '+':
@@ -47,10 +47,10 @@ function Calculator() {
         setValue('Error');
         return;
     }
-  
+
     setValue(result.toString());
   };
-  
+
 
   return (
     <div className="calculator">
